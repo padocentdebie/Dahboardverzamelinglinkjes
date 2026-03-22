@@ -67,7 +67,28 @@
         messagingSenderId: "825633841222",
         appId: "1:825633841222:web:15d93d08e2b719285dea47"
     };
+// --- NIEUWE FUNCTIE: Kopieer huidige URL en vul titel in ---
+const autoFillBtn = document.createElement('button');
+autoFillBtn.innerText = "📍 Gebruik deze pagina";
+autoFillBtn.style.backgroundColor = "#555";
+autoFillBtn.style.marginBottom = "10px";
 
+// Voeg de knop toe boven de input sectie
+document.querySelector('.input-section').before(autoFillBtn);
+
+autoFillBtn.addEventListener('click', () => {
+    // Pakt de huidige URL van de browserbalk
+    const currentUrl = window.location.href;
+    const currentTitle = document.title;
+
+    // Vult de velden direct voor je in
+    document.getElementById('linkUrl').value = currentUrl;
+    document.getElementById('linkName').value = currentTitle;
+    
+    // Optioneel: kopieer ook naar klembord
+    navigator.clipboard.writeText(currentUrl);
+    console.log("URL gekopieerd: " + currentUrl);
+});
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
